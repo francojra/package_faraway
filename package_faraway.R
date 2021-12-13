@@ -48,6 +48,7 @@ a <- ggplot(alf1, aes(x = shade, y = media, fill = shade)) +
     geom_errorbar(aes(ymin = media - se, ymax = media + se), width = .2,
                  position = position_dodge(.9)) +
   scale_fill_brewer(palette = "PuOr") +
+  labs(y = "Colheita alfalfa", x = "Sombreamento") +
   theme(legend.position = "none")
 a
 
@@ -56,9 +57,10 @@ b <- ggplot(alf2, aes(x = irrigation, y = media, fill = irrigation)) +
     geom_errorbar(aes(ymin = media - se, ymax = media + se), width = .2,
                  position = position_dodge(.9)) +
   scale_fill_brewer(palette = "PuOr") +
+  labs(y = "Colheita alfalfa", x = "Irrigação") +
   theme(legend.position = "none")
 b
 
-# Gráfico juntos
+# Gráfico juntos - Pacote gridExtra
 
 gridExtra::grid.arrange(a, b)
