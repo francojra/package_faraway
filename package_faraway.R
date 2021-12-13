@@ -36,3 +36,9 @@ alfalfa %>%
 alfalfa %>%
   group_by(irrigation) %>%
   summarise(media = mean(yield), se = sd(yield) / sqrt(length(yield)))
+
+# Gráfico ----------------------------------------------------------------------------------------------------------------------------------
+
+library(ggplot2)
+
+ggplot(alfalfa, aes(x = shade, y = media))
