@@ -17,7 +17,22 @@ faraway::alfalfa # Dados de um experimento dos efeitos da inoculação de sement
 
 faraway::babyfood # Dados sobre estudos de doenças respiratórias infantis
 
-# Carregando banco de dados ----------------------------------------------------------------------------------------------------------------
+# Visualizando o banco de dados selecionado ----------------------------------------------------------------------------------------------------------------
 
 View(alfalfa)
 
+# Descrição dos dados ----------------------------------------------------------------------------------------------------------------------
+
+library(dplyr)
+
+# Média e erro-padrão por tratamento de sombra
+
+alfalfa %>%
+  group_by(shade) %>%
+  summarise(media = mean(yield), se = sd(yield) / sqrt(length(yield)))
+
+# Média e erro-padrão por tratamento de irrigação
+
+alfalfa %>%
+  group_by(irrigation) %>%
+  summarise(media = mean(yield), se = sd(yield) / sqrt(length(yield)))
