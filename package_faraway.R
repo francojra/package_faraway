@@ -27,18 +27,38 @@ library(dplyr)
 
 # Média e erro-padrão por tratamento de sombra
 
-alfalfa %>%
+alf1 <- alfalfa %>%
   group_by(shade) %>%
   summarise(media = mean(yield), se = sd(yield) / sqrt(length(yield)))
+alf1
 
 # Média e erro-padrão por tratamento de irrigação
 
-alfalfa %>%
+alf2 <- alfalfa %>%
   group_by(irrigation) %>%
   summarise(media = mean(yield), se = sd(yield) / sqrt(length(yield)))
+alf2
 
 # Gráfico ----------------------------------------------------------------------------------------------------------------------------------
 
-library(ggplot2)
+library(ggplot2) # Pacote para produzir os gráficos
 
-ggplot(alfalfa, aes(x = shade, y = media))
+a <- ggplot(alf1, aes(x = shade, y = media, fill = shade)) +
+  geom_bar(stat = "identity", position = position_dodge()) +
+    geom_errorbar(aes(ymin = media - se, ymax = media + se), width = .2,
+                 position = position_dodge(.9)) +
+  scale_fill_brewer(palette = "PuOr") +
+  theme(legend.position = "none")
+a
+
+b <- ggplot(alf2, aes(x = irrigation, y = media, fill = irrigation)) +
+  geom_bar(stat = "identity", position = position_dodge()) +
+    geom_errorbar(aes(ymin = media - se, ymax = media + se), width = .2,
+                 position = position_dodge(.9)) +
+  scale_fill_brewer(palette = "PuOr") +
+  theme(legend.position = "none")
+b
+
+# Gráfico juntos
+
+gridExtra::grid.arrange(a, b)
