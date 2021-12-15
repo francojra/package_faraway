@@ -9,7 +9,7 @@
 install.packages("faraway")
 library(faraway)
 
-# Banco de dados disponíveis -------------------------------------------------------------------------------------------------------
+# Banco de dados disponíveis no pacote-------------------------------------------------------------------------------------------------------
 
 faraway::airpass # Dados que apresenta o número de passageiros de 1949 a 1961
 
@@ -25,14 +25,14 @@ View(alfalfa)
 
 library(dplyr)
 
-# Média e erro-padrão por tratamento de sombra
+## Média e erro-padrão por tratamento de sombra
 
 alf1 <- alfalfa %>%
   group_by(shade) %>%
   summarise(media = mean(yield), se = sd(yield) / sqrt(length(yield)))
 alf1
 
-# Média e erro-padrão por tratamento de irrigação
+## Média e erro-padrão por tratamento de irrigação
 
 alf2 <- alfalfa %>%
   group_by(irrigation) %>%
@@ -61,6 +61,6 @@ b <- ggplot(alf2, aes(x = irrigation, y = media, fill = irrigation)) +
   theme(legend.position = "none")
 b
 
-# Gráfico juntos - Pacote gridExtra
+## Gráfico juntos - Pacote gridExtra
 
 gridExtra::grid.arrange(a, b)
